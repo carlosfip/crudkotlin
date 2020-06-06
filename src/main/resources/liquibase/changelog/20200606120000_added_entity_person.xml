@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="202006061200-1" author="carlos.gomes">
+        <preConditions onFail="CONTINUE">
+            <not>
+                <sequenceExists sequenceName="S_PERSON"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="S_PERSON" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="202006061200-2" author="carlos.gomes">
+        <preConditions onFail="CONTINUE">
+            <not>
+                <tableExists tableName="T_PERSON"/>
+            </not>
+        </preConditions>
+
+
+        <createTable tableName="T_PERSON">
+            <column name="ID" type="BIGINT" autoIncrement="${autoincrement}">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+
+            <column name="name" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cpf" type="varchar">
+                <constraints nullable="true" />
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

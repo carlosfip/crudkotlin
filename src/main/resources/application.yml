@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: ClientCrud
+  jackson:
+    serialization.indent_output: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORTA:5432}/${DB_NAME:crudkotlin}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    hikari:
+      minimumIdle: 8
+      maximumPoolSize: 15
+      idleTimeout: 30000
+      poolName: SpringBootJPAHikariCP
+      maxLifetime: 2000000
+      connectionTimeout: 20000
+      leakDetectionThreshold: 5000
+      auto-commit: false
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database: POSTGRESQL
+    show-sql: false
+    properties:
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.temp.use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: none
+
+    generate-ddl: true
+  liquibase:
+    change-log: "classpath:/liquibase/master.xml"
